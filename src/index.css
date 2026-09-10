@@ -1,1 +1,24 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+:root {
+  color: #191919;
+  background: #f3efe8;
+}
+
+html, body, #root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
