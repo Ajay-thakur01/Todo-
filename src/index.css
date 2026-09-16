@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --sidebar-width: 240px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans bg-zinc-50 text-zinc-900 antialiased;
+  }
+
+  .dark body {
+    @apply bg-zinc-950 text-zinc-100;
+  }
+
+  /* Minimal custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-200 dark:bg-zinc-800 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-300 dark:bg-zinc-700;
+  }
+}
+
+@keyframes strikeThrough {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes pulseUrgent {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.45);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.12);
+    transform: scale(1.02);
+  }
+}
+
+@layer components {
+  /* Focus ring utility */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-600 focus-visible:ring-offset-1;
+  }
+
+  /* Sidebar nav item */
+  .nav-item {
+    @apply flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium
+           text-zinc-600 dark:text-zinc-400
+           hover:bg-zinc-100 dark:hover:bg-zinc-900
+           hover:text-zinc-900 dark:hover:text-zinc-100
+           transition-colors duration-150 cursor-pointer select-none;
+  }
+
+  .nav-item.active {
+    @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-semibold;
+  }
+
+  /* Task row */
+  .task-row {
+    @apply flex items-start gap-3.5 px-3 py-3 rounded-xl
+           hover:bg-zinc-100/70 dark:hover:bg-zinc-900/60
+           border border-transparent hover:border-zinc-200/60 dark:hover:border-zinc-800/60
+           transition-all duration-150;
+  }
+
+  /* Strike-through animation container */
+  .strikethrough-anim {
+    position: relative;
+    display: inline-block;
+  }
+
+  .strikethrough-anim.completed::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1.5px;
+    background-color: currentColor;
+    animation: strikeThrough 0.28s cubic-bezier(0.2, 0, 0, 1) forwards;
+  }
+
+  /* Card surface */
+  .card {
+    @apply bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800/80 rounded-2xl;
+  }
+
+  /* Pulse urgent animation */
+  .animate-pulseUrgent {
+    animation: pulseUrgent 1.8s infinite ease-in-out;
+  }
+
+  .time-left-indicator {
+    transition: color 1000ms ease, background-color 1000ms ease, border-color 1000ms ease, box-shadow 1000ms ease;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
